@@ -2,31 +2,54 @@ from django.utils import timezone
 from datetime import datetime
 from .models import Redirection
 
+from string import ascii_letters, digits
+from random import sample
+
 NO_LIMIT = -1
 NO_DATETIME = datetime(1970, 1, 1, tzinfo=timezone.get_current_timezone())
-print(NO_DATETIME)
+
+URL_CHARACTERS = ascii_letters + digits
+BASE_LINK_LEN = 4
 
 
-def create_redirection(full_link: str, short_link: str, delete_at: datetime | None, redirect_limit: int | None):
-    try:
-        redirection = Redirection.objects.get(short_link=short_link, active=True)
-        print(redirection.id)
-        return False
+def create_redirection(full_link: str, short_link: str, delete_at: datetime | str, redirect_limit: int | str) -> dict:
+    if not full_link:
+        return {"title": "Cannot create",
+                "description": "Link must be provided for shortening."}
 
-    except Redirection.DoesNotExist:
-        if delete_at is None:
-            delete_at = NO_DATETIME
-        if redirect_limit is None:
-            redirect_limit = NO_LIMIT
-        print(full_link, short_link, delete_at, redirect_limit)
-        redirection = Redirection(full_link=full_link, short_link=short_link,
-                                  delete_at=delete_at, redirect_limit=redirect_limit)
-        redirection.save()
-        print(redirection.id, "Created")
-        return True
+    if delete_at:
+        if isinstance(delete_at, str):
+            delete_at = datetime.fromisoformat(delete_at)
+
+        if delete_at.timestamp() <= timezone.now().timestamp():
+            return {"title": "Cannot create",
+                    "description": "The specified time cannot be earlier than the current time."}
+
+    if not short_link:
+        short_link = random_str(BASE_LINK_LEN)
+
+    if Redirection.objects.filter(short_link=short_link, active=True).exists():
+        return {"title": "Cannot create",
+                "description": "The shortened link is already taken"}
+
+    if not delete_at:
+        delete_at = NO_DATETIME
+
+    if not redirect_limit:
+        redirect_limit = NO_LIMIT
+
+    elif redirect_limit.isdigit() and int(redirect_limit) <= 0:
+        return {"title": "Cannot create",
+                "description": "Redirect limit cannot be less than 1"}
+
+    redirection = Redirection(full_link=full_link, short_link=short_link,
+                              delete_at=delete_at, redirect_limit=redirect_limit)
+    redirection.save()
+    return {"title": "Successfully created",
+            "description": f"{full_link=};\n{short_link=};\n{delete_at=};\n{redirect_limit=};"}
 
 
-def deactivate_redirection(redirection=None, redirection_id=None, short_link=None):
+def deactivate_redirection(redirection=None, redirection_id=None, short_link=None) -> dict:
     assert (redirection, redirection_id, short_link).count(None) != 1, "one argument expected"
 
     try:
@@ -35,12 +58,14 @@ def deactivate_redirection(redirection=None, redirection_id=None, short_link=Non
         elif short_link:
             redirection = Redirection.objects.get(short_link=short_link, active=True)
     except Redirection.DoesNotExist:
-        return True
+        return {"title": "Cannot delete",
+                "description": "Can't remove link"}
 
     redirection.active = False
     redirection.save()
-    print(redirection.id, "Deleted")
-    return False
+
+    return {"title": "Successfully removed",
+            "description": "Shortened link removed successfully"}
 
 
 def get_full_link(short_link: str) -> str:
@@ -68,3 +93,7 @@ def check_redirection(redirection: Redirection) -> bool:
     time_is_normal = time_unlimited or within_time
 
     return counter_is_normal and time_is_normal
+
+
+def random_str(length, characters=URL_CHARACTERS):
+    return "".join(sample(characters, length))
