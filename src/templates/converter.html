@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+SLUniversalConverter
+{% endblock %}
+
+{% block body %}
+<div class="text-center">
+    <h1>SLUniversalConverter</h1>
+    <h3>File converting service</h3>
+</div>
+
+<form enctype="multipart/form-data" action="" method="post"
+      class="text-center m-5 w-75 mx-auto p-3 bg-body-secondary rounded-3">
+    {% csrf_token %}
+    <div class="m-1 mb-2 d-flex">
+        <select  name="input" id="input_selector" class="form-select" required>
+            <option value="" disabled selected>Input format</option>
+
+        </select>
+        <select name="output" id="output_selector" class="form-select" required>
+            <option value="" disabled selected>Output format</option>
+        </select>
+    </div>
+    <div class="input-group m-1">
+        <input name="file" id="file_input" class="form-control form-control-lg" type="file" required>
+        <input type="submit" class="btn btn-primary btn-lg">
+    </div>
+</form>
+<script src="{%  static 'organize_formats.js' %}"></script>
+{% endblock %}

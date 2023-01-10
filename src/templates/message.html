@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block title %}
+    {{ title }}
+{% endblock %}
+
+{% block body %}
+    <div class="text-center m-5">
+        <h2>{{ title }}</h2>
+        <h3>{{ description|linebreaks}}</h3>
+    </div>
+{% endblock %}
