@@ -6,7 +6,7 @@ from .services import FILE_FORMATS, convert, get_content_type, transform_filenam
 
 def index(request):
     if request.method == "GET":
-        return render(request, "index.html")
+        return render(request, "converter.html")
 
     # POST request
     if not request.FILES:
