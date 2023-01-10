@@ -4,25 +4,26 @@ from .services import create_redirection, deactivate_redirection, get_full_link
 
 
 def index(request):
-    if request.method == 'POST':
-        full_link = request.POST.get("full_link", "")
-        short_link = request.POST.get("short_link", "")
-        datetime = request.POST.get("datetime", "")
-        count = request.POST.get("count", "")
+    if request.method == 'GET':
+        return render(request, "cutter.html")
 
-        response = create_redirection(
-            full_link=full_link,
-            short_link=short_link,
-            delete_at=datetime,
-            redirect_limit=count)
+    # POST request
+    full_link = request.POST.get("full_link", "")
+    short_link = request.POST.get("short_link", "")
+    datetime = request.POST.get("datetime", "")
+    count = request.POST.get("count", "")
 
-        return render(
-            request,
-            "message.html",
-            response
-        )
+    response = create_redirection(
+        full_link=full_link,
+        short_link=short_link,
+        delete_at=datetime,
+        redirect_limit=count)
 
-    return render(request, "index.html")
+    return render(
+        request,
+        "message.html",
+        response
+    )
 
 
 def redirect_user(request, short_link):
