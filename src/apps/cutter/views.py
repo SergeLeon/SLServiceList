@@ -10,12 +10,14 @@ def index(request):
     # POST request
     full_link = request.POST.get("full_link", "")
     short_link = request.POST.get("short_link", "")
+    host = request.POST.get("host", "")
     datetime = request.POST.get("datetime", "")
     count = request.POST.get("count", "")
 
     response = create_redirection(
         full_link=full_link,
         short_link=short_link,
+        host=host,
         delete_at=datetime,
         redirect_limit=count)
 

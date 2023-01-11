@@ -23,13 +23,19 @@
         </div>
         <div class="m-1 d-flex">
             <div class="input-group">
-                <span class="input-group-text" id="domain">
-                    <script>document.getElementById('domain').innerHTML = window.location.host + window.location.pathname</script>
-                </span>
+                <span class="input-group-text" id="domain_label"></span>
+                <input name="host" id="domain_input" type="text">
                 <input name="short_link" class="form-control" type="text" placeholder="output url" autocomplete="off">
             </div>
             <input name="datetime" class="form-control" type="datetime-local" placeholder="delete at">
             <input name="count" class="form-control" type="number">
         </div>
     </form>
+    <script>
+        let path = window.location.host + window.location.pathname;
+        document.getElementById('domain_label').innerHTML = path;
+        let domain_input = document.getElementById('domain_input');
+        domain_input.value = path;
+        domain_input.style.display = "none";
+    </script>
 {% endblock %}

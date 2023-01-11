@@ -12,7 +12,7 @@ URL_CHARACTERS = ascii_letters + digits
 BASE_LINK_LEN = 4
 
 
-def create_redirection(full_link: str, short_link: str, delete_at: datetime | str, redirect_limit: int | str) -> dict:
+def create_redirection(full_link: str, host: str, short_link: str, delete_at: datetime | str, redirect_limit: int | str) -> dict:
     if not full_link:
         return {"title": "Cannot create",
                 "description": "Link must be provided for shortening."}
@@ -46,7 +46,7 @@ def create_redirection(full_link: str, short_link: str, delete_at: datetime | st
                               delete_at=delete_at, redirect_limit=redirect_limit)
     redirection.save()
     return {"title": "Successfully created",
-            "description": f"{full_link=};\n{short_link=};\n{delete_at=};\n{redirect_limit=};"}
+            "description": f"{full_link=};\n{host+short_link=};\n{delete_at=};\n{redirect_limit=};"}
 
 
 def deactivate_redirection(redirection=None, redirection_id=None, short_link=None) -> dict:
