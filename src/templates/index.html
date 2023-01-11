@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}
+SLServiceList
+{% endblock %}
+
+{% block body %}
+<div class="text-center">
+    <h1>SLServiceList</h1>
+    <h3>Collection of services</h3>
+</div>
+
+<div class="m-5 w-75 mx-auto p-3 bg-body-secondary rounded-3 text-center">
+    <div class="list-group list-group-flush mx-auto bg-body-secondary rounded-3">
+
+        <a href="r" class="list-group-item">
+            <div class="justify-content-between">
+                <h5 class="mb-1">SLLinkCutter</h5>
+            </div>
+            <p class="mb-1">Link shortening service</p>
+        </a>
+
+        <a href="c" class="list-group-item">
+            <div class="justify-content-between">
+                <h5 class="mb-1">SLUniversalConverter</h5>
+            </div>
+            <p class="mb-1">File converting service</p>
+        </a>
+
+    </div>
+</div>
+{% endblock %}
