@@ -22,7 +22,12 @@
             <label>Redirect limit</label>
         </div>
         <div class="m-1 d-flex">
-            <input name="short_link" class="form-control" type="text"  placeholder="output url" autocomplete="off" >
+            <div class="input-group">
+                <span class="input-group-text" id="domain">
+                    <script>document.getElementById('domain').innerHTML = window.location.host + window.location.pathname</script>
+                </span>
+                <input name="short_link" class="form-control" type="text" placeholder="output url" autocomplete="off">
+            </div>
             <input name="datetime" class="form-control" type="datetime-local" placeholder="delete at">
             <input name="count" class="form-control" type="number">
         </div>
