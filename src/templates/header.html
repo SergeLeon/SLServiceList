@@ -1,5 +1,11 @@
 <header>
     <ul class="m-2 nav d-flex justify-content-sm-between w-75 mx-auto bg-body-secondary rounded-3">
+        <li class="nav-item" id="back_link">
+            <a class="nav-link text-dark" href="#" onclick="javascript:history.back(); return false;">Back</a>
+        </li>
+        <script>
+            if (location.pathname == "/"){document.getElementById('back_link').style.display = "none";}
+        </script>
         <li class="nav-item">
             <a class="nav-link text-dark" href="/">Home</a>
         </li>
