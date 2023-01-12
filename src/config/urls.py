@@ -8,4 +8,5 @@ urlpatterns = [
     path('', lambda request: render(request, "index.html")),
     path('r/', include("apps.cutter.urls")),
     path('c/', include("apps.converter.urls")),
+    path('q/', include("apps.qrcoder.urls")),
 ]

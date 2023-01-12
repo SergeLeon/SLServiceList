@@ -43,6 +43,7 @@ INSTALLED_APPS = [
 
     'apps.cutter.apps.CutterConfig',
     'apps.converter.apps.ConverterConfig',
+    'apps.qrcoder.apps.QrcoderConfig',
 ]
 
 MIDDLEWARE = [

@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+SLServiceList
+{% endblock %}
+
+{% block body %}
+<div class="text-center">
+    <h1>QRCoder</h1>
+    <h3>QR Code generator</h3>
+</div>
+
+<div class="m-5 w-75 mx-auto p-3 bg-body-secondary rounded-3 text-center container">
+    <div class="row">
+        <div class="col">
+            <img id="qrcode" src="data:image/gif;base64,R0lGODlhAQABAAAAACwAAAAAAQABAAA=" width="512" height="512"
+                 alt="">
+        </div>
+
+        <form action="#" method="post" class="p-3 col">
+            {% csrf_token %}
+
+            <textarea name="content" class="form-control" rows="3" placeholder="QR code content"></textarea>
+
+            <select name="style" class="form-select">
+                <option value="" disabled selected>Style</option>
+
+                <option value="square">Square</option>
+                <option value="gsquare">Gapped Square</option>
+                <option value="circle">Circle</option>
+                <option value="rounded">Rounded</option>
+                <option value="vbars">Vertical Bars</option>
+                <option value="hbars">Horizontal Bars</option>
+            </select>
+
+            <select name="correction" class="form-select">
+                <option value="" disabled selected>Correction</option>
+
+                <option value="1">7%</option>
+                <option value="2">15%</option>
+                <option value="3">25%</option>
+                <option value="4">30%</option>
+            </select>
+
+            <div class="m-1 d-flex justify-content-between">
+                <input type="button" class="btn btn-primary btn-lg" onclick="javascript:updateQR();" value="Update">
+                <input type="submit" class="btn btn-primary btn-lg" onclick="javascript:updateQR();" value="Download">
+            </div>
+
+        </form>
+    </div>
+</div>
+<script src="{%  static 'update_qr.js' %}"></script>
+{% endblock %}
