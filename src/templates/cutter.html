@@ -1,41 +1,44 @@
 {% extends "base.html" %}
+{% load i18n %}
 
 {% block title %}
-    LinkCutter
+LinkCutter
 {% endblock %}
 
 {% block body %}
-    <div class="text-center">
-        <h1>LinkCutter</h1>
-        <h3>Link shortening service</h3>
-    </div>
+<div class="text-center">
+    <h1>LinkCutter</h1>
+    <h3>{% translate 'cutter_description' %}</h3>
+</div>
 
-    <form action="" method="post" class="text-center m-5 w-75 mx-auto p-3 bg-body-secondary rounded-3">
-        {% csrf_token %}
-        <div class="input-group mb-2">
-            <input name="full_link" class="form-control form-control-lg" type="url" required  placeholder="input url" autocomplete="off" autofocus>
-            <input type="submit" class="btn btn-primary btn-lg ">
+<form action="" method="post" class="text-center m-5 w-75 mx-auto p-3 bg-body-secondary rounded-3">
+    {% csrf_token %}
+    <div class="input-group mb-2">
+        <input name="full_link" class="form-control form-control-lg" type="url" required
+               placeholder="{% translate 'input_url' %}" autocomplete="off" autofocus>
+        <input type="submit" class="btn btn-primary btn-lg ">
+    </div>
+    <div class="d-flex justify-content-around">
+        <label>{% translate 'output_url' %}</label>
+        <label>{% translate 'delete_at' %}</label>
+        <label>{% translate 'redirect_limit' %}</label>
+    </div>
+    <div class="m-1 d-flex">
+        <div class="input-group">
+            <span class="input-group-text" id="domain_label"></span>
+            <input name="host" id="domain_input" type="text">
+            <input name="short_link" class="form-control" type="text" placeholder="{% translate 'output_url' %}"
+                   autocomplete="off">
         </div>
-        <div class="d-flex justify-content-around">
-            <label>Output URL</label>
-            <label>Delete at</label>
-            <label>Redirect limit</label>
-        </div>
-        <div class="m-1 d-flex">
-            <div class="input-group">
-                <span class="input-group-text" id="domain_label"></span>
-                <input name="host" id="domain_input" type="text">
-                <input name="short_link" class="form-control" type="text" placeholder="output url" autocomplete="off">
-            </div>
-            <input name="datetime" class="form-control" type="datetime-local" placeholder="delete at">
-            <input name="count" class="form-control" type="number">
-        </div>
-    </form>
-    <script>
+        <input name="datetime" class="form-control" type="datetime-local" placeholder="{% translate 'delete_at' %}">
+        <input name="count" class="form-control" type="number" placeholder="{% translate 'redirect_limit' %}">
+    </div>
+</form>
+<script>
         let path = window.location.host + window.location.pathname;
         document.getElementById('domain_label').innerHTML = path;
         let domain_input = document.getElementById('domain_input');
         domain_input.value = path;
         domain_input.style.display = "none";
-    </script>
+</script>
 {% endblock %}

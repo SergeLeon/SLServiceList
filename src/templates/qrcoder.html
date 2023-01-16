@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load i18n %}
 
 {% block title %}
 SLServiceList
@@ -8,7 +9,7 @@ SLServiceList
 {% block body %}
 <div class="text-center">
     <h1>QRCoder</h1>
-    <h3>QR Code generator</h3>
+    <h3>{% translate 'qr_description' %}</h3>
 </div>
 
 <div class="m-5 w-75 mx-auto p-3 bg-body-secondary rounded-3 text-center container">
@@ -21,21 +22,22 @@ SLServiceList
         <form action="#" method="post" class="p-3 col">
             {% csrf_token %}
 
-            <textarea name="content" class="form-control" rows="3" placeholder="QR code content"></textarea>
+            <textarea name="content" class="form-control" rows="3"
+                      placeholder="{% translate 'qr_content' %}"></textarea>
 
             <select name="style" class="form-select">
-                <option value="" disabled selected>Style</option>
+                <option value="" disabled selected>{% translate 'style' %}</option>
 
-                <option value="square">Square</option>
-                <option value="gsquare">Gapped Square</option>
-                <option value="circle">Circle</option>
-                <option value="rounded">Rounded</option>
-                <option value="vbars">Vertical Bars</option>
-                <option value="hbars">Horizontal Bars</option>
+                <option value="square">{% translate 'style_square' %}</option>
+                <option value="gsquare">{% translate 'style_gapped_square' %}</option>
+                <option value="circle">{% translate 'style_circle' %}</option>
+                <option value="rounded">{% translate 'style_rounded' %}</option>
+                <option value="vbars">{% translate 'style_ver_bars' %}</option>
+                <option value="hbars">{% translate 'style_hor_bars' %}</option>
             </select>
 
             <select name="correction" class="form-select">
-                <option value="" disabled selected>Correction</option>
+                <option value="" disabled selected>{% translate 'correction' %}</option>
 
                 <option value="1">7%</option>
                 <option value="2">15%</option>
@@ -44,12 +46,24 @@ SLServiceList
             </select>
 
             <div class="m-1 d-flex justify-content-between">
-                <input type="button" class="btn btn-primary btn-lg" onclick="javascript:updateQR();" value="Update">
-                <input type="submit" class="btn btn-primary btn-lg" onclick="javascript:updateQR();" value="Download">
+                <input type="button" class="btn btn-primary btn-lg" onclick="javascript:updateQrAndCheck();"
+                       value="{% translate 'qr_update_button' %}">
+                <input type="submit" class="btn btn-primary btn-lg"
+                       value="{% translate 'qr_download_button' %}">
             </div>
 
         </form>
     </div>
 </div>
 <script src="{%  static 'update_qr.js' %}"></script>
+<script>
+    updateQR();
+    async function updateQrAndCheck(){
+        success = await updateQR()
+        if (!success){
+            alert("{% translate 'too_much_data' %}")
+        }
+    }
+    document.forms[0].addEventListener('change', updateQrAndCheck);
+</script>
 {% endblock %}

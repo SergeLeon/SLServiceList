@@ -1,0 +1,101 @@
+msgid ""
+msgstr ""
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-01-15 00:33+0300\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+
+#: .\converter.html:12 .\index.html:28
+msgid "converter_description"
+msgstr "File converting service"
+
+#: .\converter.html:20
+msgid "input_format"
+msgstr "Input format"
+
+#: .\converter.html:24
+msgid "output_format"
+msgstr "Output format"
+
+#: .\cutter.html:11 .\index.html:21
+msgid "cutter_description"
+msgstr "Link shortening service"
+
+#: .\cutter.html:18
+msgid "input_url"
+msgstr "Input URL"
+
+#: .\cutter.html:22 .\cutter.html:30
+msgid "output_url"
+msgstr "Output URL"
+
+#: .\cutter.html:23 .\cutter.html:33
+msgid "delete_at"
+msgstr "Delete at"
+
+#: .\cutter.html:24 .\cutter.html:34
+msgid "redirect_limit"
+msgstr "Redirect limit"
+
+#: .\header.html:7
+msgid "back_button"
+msgstr "Back"
+
+#: .\header.html:15
+msgid "home_button"
+msgstr "Home"
+
+#: .\index.html:11
+msgid "service_description"
+msgstr "Collection of services"
+
+#: .\index.html:35 .\qrcoder.html:12
+msgid "qr_description"
+msgstr "QR Code generator"
+
+#: .\qrcoder.html:26
+msgid "qr_content"
+msgstr "QR code content"
+
+#: .\qrcoder.html:29
+msgid "style"
+msgstr "Style"
+
+#: .\qrcoder.html:31
+msgid "style_square"
+msgstr "Square"
+
+#: .\qrcoder.html:32
+msgid "style_gapped_square"
+msgstr "Gapped Square"
+
+#: .\qrcoder.html:33
+msgid "style_circle"
+msgstr "Circle"
+
+#: .\qrcoder.html:34
+msgid "style_rounded"
+msgstr "Rounded"
+
+#: .\qrcoder.html:35
+msgid "style_ver_bars"
+msgstr "Vertical Bars"
+
+#: .\qrcoder.html:36
+msgid "style_hor_bars"
+msgstr "Horizontal Bars"
+
+#: .\qrcoder.html:40
+msgid "correction"
+msgstr "Correction"
+
+#: .\qrcoder.html:50
+msgid "qr_update_button"
+msgstr "Update"
+
+#: .\qrcoder.html:52
+msgid "qr_download_button"
+msgstr "Download"
+
+#: .\qrcoder.html:65
+msgid "too_much_data"
+msgstr "Too much data for a QR code"

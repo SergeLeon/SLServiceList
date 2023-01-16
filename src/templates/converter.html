@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load i18n %}
 
 {% block title %}
 UniversalConverter
@@ -8,19 +9,19 @@ UniversalConverter
 {% block body %}
 <div class="text-center">
     <h1>UniversalConverter</h1>
-    <h3>File converting service</h3>
+    <h3>{% translate 'converter_description' %}</h3>
 </div>
 
 <form enctype="multipart/form-data" action="" method="post"
       class="text-center m-5 w-75 mx-auto p-3 bg-body-secondary rounded-3">
     {% csrf_token %}
     <div class="m-1 mb-2 d-flex">
-        <select  name="input" id="input_selector" class="form-select" required>
-            <option value="" disabled selected>Input format</option>
+        <select name="input" id="input_selector" class="form-select" required>
+            <option value="" disabled selected>{% translate 'input_format' %}</option>
 
         </select>
         <select name="output" id="output_selector" class="form-select" required>
-            <option value="" disabled selected>Output format</option>
+            <option value="" disabled selected>{% translate 'output_format' %}</option>
         </select>
     </div>
     <div class="input-group m-1">

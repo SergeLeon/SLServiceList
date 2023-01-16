@@ -17,10 +17,7 @@ async function updateQR() {
     data = await response.blob();
     if (data.size) {
         img.src = URL.createObjectURL(data)
+        return true
     }
-    else{
-        alert("Too much data for a QR code")
-    }
+    return false
 }
-form.addEventListener('change', updateQR);
-updateQR()
